@@ -1,10 +1,7 @@
 package com.itemsandprices.manageprices.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
 public class PriceEntityDto {
     @NotEmpty(message = "The ID of the brand is required.")
     private String brandId;
@@ -28,5 +25,37 @@ public class PriceEntityDto {
 
     public @NotEmpty(message = "The ID of the product is required.") String getProductId() {
         return productId;
+    }
+
+    public void setBrandId(@NotEmpty(message = "The ID of the brand is required.") String brandId) {
+        this.brandId = brandId;
+    }
+
+    public void setStartDate(@NotEmpty(message = "The startDate of the product is required.") String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPriceList(String priceList) {
+        this.priceList = priceList;
+    }
+
+    public void setProductId(@NotEmpty(message = "The ID of the product is required.") String productId) {
+        this.productId = productId;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setCurr(String curr) {
+        this.curr = curr;
     }
 }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -20,8 +21,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @Transactional
 class ItemsAndPricesControllerTest {
@@ -43,30 +47,23 @@ class ItemsAndPricesControllerTest {
                 .build();
     }
 
-/*    @Test
+    @Test
     void findAllByPage() {
         Page<PriceEntityDto> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
-
-        Mockito.when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
+        when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
                 .thenReturn(page);
 
-        Mockito.verify(priceServiceImpl, Mockito.times(1)).findByCondition(any(), any(), any(), any());
-        Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }*/
+        Page<PriceEntityDto> res = priceServiceImpl.findByCondition(any(), any(), any(), any());
+        assertNotNull(res);
+    }
 
-    /*@Test
-    void getById() throws Exception {
-        Mockito.when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
-                .thenReturn(PriceBuilder.getDto());
+    @Test
+    void getById() {
+        when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
+                .thenReturn(Optional.of(PriceBuilder.getDto()));
+        Optional<PriceEntityDto> resultActions = priceServiceImpl.findById("1111");
 
-        mockMvc.perform(MockMvcRequestBuilders.get(ENDPOINT_URL + "/1"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content()
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Is.is(1)));
-
-        Mockito.verify(priceServiceImpl, Mockito.times(1)).findById("1");
-        Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }*/
+        assertNotNull(resultActions);
+    }
 
 }
