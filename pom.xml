@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.itemsandprices</groupId>
 	<artifactId>manageprices</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>manageprices</name>
 	<description>prices management project</description>
 	<url/>
