@@ -1,7 +1,7 @@
-package com.itemsandprices.manageprices.mapper;
+package com.itemsandprices.manageprices.api.mapper;
 
-import com.itemsandprices.manageprices.dto.PriceEntityDto;
-import com.itemsandprices.manageprices.entity.PriceEntity;
+import com.itemsandprices.manageprices.domain.dto.PriceEntityDto;
+import com.itemsandprices.manageprices.domain.entity.PriceEntity;
 
 import java.util.List;
 import java.util.Set;

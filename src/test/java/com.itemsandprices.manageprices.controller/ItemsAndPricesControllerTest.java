@@ -1,10 +1,12 @@
 package com.itemsandprices.manageprices.controller;
 
-import com.itemsandprices.manageprices.dto.PriceDto;
-import com.itemsandprices.manageprices.service.PriceService;
+import com.itemsandprices.manageprices.api.controller.ItemsAndPricesController;
+import com.itemsandprices.manageprices.domain.dto.PriceEntityDto;
+import com.itemsandprices.manageprices.service.impl.PriceServiceImpl;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,15 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 
+import static org.mockito.ArgumentMatchers.any;
+
 @Transactional
-public class ItemsAndPricesControllerTest {
+class ItemsAndPricesControllerTest {
     private static final String ENDPOINT_URL = "/api/price";
 
     @InjectMocks
     private ItemsAndPricesController priceController;
 
     @Mock
-    private PriceService priceService;
+    private PriceServiceImpl priceServiceImpl;
 
     private MockMvc mockMvc;
 
@@ -40,10 +44,10 @@ public class ItemsAndPricesControllerTest {
     }
 
     @Test
-    public void findAllByPage() throws Exception {
-        Page<PriceDto> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
+    void findAllByPage() throws Exception {
+        Page<PriceEntityDto> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
 
-        Mockito.when(priceService.findByCondition(ArgumentMatchers.any(), ArgumentMatchers.any()))
+        Mockito.when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
                 .thenReturn(page);
 
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(ENDPOINT_URL)
@@ -52,13 +56,13 @@ public class ItemsAndPricesControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.content", Matchers.hasSize(1)));
 
-        Mockito.verify(priceService, Mockito.times(1)).findByCondition(ArgumentMatchers.any(), ArgumentMatchers.any());
-        Mockito.verifyNoMoreInteractions(priceService);
+        Mockito.verify(priceServiceImpl, Mockito.times(1)).findByCondition(any(), any(), any(), any());
+        Mockito.verifyNoMoreInteractions(priceServiceImpl);
     }
 
     @Test
-    public void getById() throws Exception {
-        Mockito.when(priceService.findById(ArgumentMatchers.anyString()))
+    void getById() throws Exception {
+        Mockito.when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
                 .thenReturn(PriceBuilder.getDto());
 
         mockMvc.perform(MockMvcRequestBuilders.get(ENDPOINT_URL + "/1"))
@@ -67,13 +71,13 @@ public class ItemsAndPricesControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Is.is(1)));
 
-        Mockito.verify(priceService, Mockito.times(1)).findById("1");
-        Mockito.verifyNoMoreInteractions(priceService);
+        Mockito.verify(priceServiceImpl, Mockito.times(1)).findById("1");
+        Mockito.verifyNoMoreInteractions(priceServiceImpl);
     }
 
     @Test
-    public void save() throws Exception {
-        Mockito.when(priceService.save(ArgumentMatchers.any(PriceDto.class)))
+    void save() throws Exception {
+        Mockito.when(priceServiceImpl.save(any(PriceDto.class)))
                 .thenReturn(PriceBuilder.getDto());
 
         mockMvc.perform(
@@ -82,13 +86,13 @@ public class ItemsAndPricesControllerTest {
                                 .content(CustomUtils.asJsonString(PriceBuilder.getDto())))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
 
-        Mockito.verify(priceService, Mockito.times(1)).save(ArgumentMatchers.any(PriceDto.class));
-        Mockito.verifyNoMoreInteractions(priceService);
+        Mockito.verify(priceServiceImpl, Mockito.times(1)).save(any(PriceDto.class));
+        Mockito.verifyNoMoreInteractions(priceServiceImpl);
     }
 
     @Test
-    public void update() throws Exception {
-        Mockito.when(priceService.update(ArgumentMatchers.any(), ArgumentMatchers.anyString()))
+    void update() throws Exception {
+        Mockito.when(priceServiceImpl.update(any(), ArgumentMatchers.anyString()))
                 .thenReturn(PriceBuilder.getDto());
 
         mockMvc.perform(
@@ -97,14 +101,14 @@ public class ItemsAndPricesControllerTest {
                                 .content(CustomUtils.asJsonString(PriceBuilder.getDto())))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.verify(priceService, Mockito.times(1))
-                .update(ArgumentMatchers.any(PriceDto.class), ArgumentMatchers.anyString());
-        Mockito.verifyNoMoreInteractions(priceService);
+        Mockito.verify(priceServiceImpl, Mockito.times(1))
+                .update(any(PriceDto.class), ArgumentMatchers.anyString());
+        Mockito.verifyNoMoreInteractions(priceServiceImpl);
     }
 
     @Test
-    public void delete() throws Exception {
-        Mockito.doNothing().when(priceService).deleteById(ArgumentMatchers.anyString());
+    void delete() throws Exception {
+        Mockito.doNothing().when(priceServiceImpl).deleteById(ArgumentMatchers.anyString());
 
         mockMvc.perform(
                         MockMvcRequestBuilders.delete(ENDPOINT_URL + "/1")
@@ -112,8 +116,8 @@ public class ItemsAndPricesControllerTest {
                                 .content(CustomUtils.asJsonString(PriceBuilder.getIds())))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.verify(priceService, Mockito.times(1))
+        Mockito.verify(priceServiceImpl, Mockito.times(1))
                 .deleteById(Mockito.anyString());
-        Mockito.verifyNoMoreInteractions(priceService);
+        Mockito.verifyNoMoreInteractions(priceServiceImpl);
     }
 }
