@@ -11,6 +11,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RequestMapping("/api/itemsAndPrices")
 @RestController
@@ -25,14 +27,14 @@ public class ItemsAndPricesController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PriceEntityDto> findById(@PathVariable("id") String id) {
-        PriceEntityDto price = priceServiceImpl.findById(id);
-        return ResponseEntity.ok(price);
+        Optional<PriceEntityDto> price = priceServiceImpl.findById(id);
+        return price.map(priceRecovered -> ResponseEntity.ok().body(priceRecovered)).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/page-query")
     public ResponseEntity<Page<PriceEntityDto>> pageQuery(@Valid @RequestBody PriceEntityDto priceDto, @PageableDefault(sort = "createAt", direction = Sort.Direction.DESC) Pageable pageable) {
 
-        Page<PriceEntityDto> pricePage = priceServiceImpl.findByCondition(null, null, null, pageable);
+        Page<PriceEntityDto> pricePage = priceServiceImpl.findByCondition(priceDto.getStartDate(), Long.valueOf(priceDto.getBrandId()), priceDto.getProductId(), pageable);
         return ResponseEntity.ok(pricePage);
     }
 }

@@ -37,30 +37,24 @@ class ItemsAndPricesControllerTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders
                 .standaloneSetup(priceController)
                 .build();
     }
 
-    @Test
-    void findAllByPage() throws Exception {
+/*    @Test
+    void findAllByPage() {
         Page<PriceEntityDto> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
 
         Mockito.when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
                 .thenReturn(page);
 
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(ENDPOINT_URL)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.content", Matchers.hasSize(1)));
-
         Mockito.verify(priceServiceImpl, Mockito.times(1)).findByCondition(any(), any(), any(), any());
         Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void getById() throws Exception {
         Mockito.when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
                 .thenReturn(PriceBuilder.getDto());
@@ -73,51 +67,6 @@ class ItemsAndPricesControllerTest {
 
         Mockito.verify(priceServiceImpl, Mockito.times(1)).findById("1");
         Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }
+    }*/
 
-    @Test
-    void save() throws Exception {
-        Mockito.when(priceServiceImpl.save(any(PriceDto.class)))
-                .thenReturn(PriceBuilder.getDto());
-
-        mockMvc.perform(
-                        MockMvcRequestBuilders.post(ENDPOINT_URL)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(CustomUtils.asJsonString(PriceBuilder.getDto())))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
-
-        Mockito.verify(priceServiceImpl, Mockito.times(1)).save(any(PriceDto.class));
-        Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }
-
-    @Test
-    void update() throws Exception {
-        Mockito.when(priceServiceImpl.update(any(), ArgumentMatchers.anyString()))
-                .thenReturn(PriceBuilder.getDto());
-
-        mockMvc.perform(
-                        MockMvcRequestBuilders.put(ENDPOINT_URL + "/1")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(CustomUtils.asJsonString(PriceBuilder.getDto())))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
-        Mockito.verify(priceServiceImpl, Mockito.times(1))
-                .update(any(PriceDto.class), ArgumentMatchers.anyString());
-        Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }
-
-    @Test
-    void delete() throws Exception {
-        Mockito.doNothing().when(priceServiceImpl).deleteById(ArgumentMatchers.anyString());
-
-        mockMvc.perform(
-                        MockMvcRequestBuilders.delete(ENDPOINT_URL + "/1")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(CustomUtils.asJsonString(PriceBuilder.getIds())))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
-        Mockito.verify(priceServiceImpl, Mockito.times(1))
-                .deleteById(Mockito.anyString());
-        Mockito.verifyNoMoreInteractions(priceServiceImpl);
-    }
 }

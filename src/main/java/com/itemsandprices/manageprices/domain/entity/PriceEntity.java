@@ -1,9 +1,6 @@
 package com.itemsandprices.manageprices.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -16,6 +13,9 @@ import lombok.*;
 @RequiredArgsConstructor
 public class PriceEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "RATE_ID")
+    private Long rateId;
     @Column(name = "BRAND_ID")
     private Long brandId;
     @Column(name = "START_DATE")
