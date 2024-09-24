@@ -10,6 +10,5 @@ import java.util.List;
 public interface PriceRepository extends JpaRepository<PriceEntity, String> {
 
     List<PriceEntity> findByStartDateAndBrandIdAndProductId(String startDate, Long brandId, String productId);
-    /*@Override
-    PriceEntity findById(String id);*/
+
 }

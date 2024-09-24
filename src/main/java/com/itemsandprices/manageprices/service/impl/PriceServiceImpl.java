@@ -1,8 +1,9 @@
 package com.itemsandprices.manageprices.service.impl;
 
 import com.itemsandprices.manageprices.api.mapper.PriceMapper;
-import com.itemsandprices.manageprices.domain.dto.PriceEntityDto;
+import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
 import com.itemsandprices.manageprices.domain.entity.PriceEntity;
+import com.itemsandprices.manageprices.domain.entity.dto.PriceEntityDto;
 import com.itemsandprices.manageprices.domain.repository.PriceRepository;
 import com.itemsandprices.manageprices.service.PriceService;
 import jakarta.transaction.Transactional;
@@ -29,13 +30,13 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Optional<PriceEntityDto> findById(String id) {
+    public Optional<PriceEntityDao> findById(String id) {
         return Optional.ofNullable(priceMapper.toDto(repository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new)));
     }
 
     @Override
-    public Page<PriceEntityDto> findByCondition(String startDate, Long brandId, String productId, Pageable pageable) {
+    public Page<PriceEntityDao> findByCondition(String startDate, Long brandId, String productId, Pageable pageable) {
         List<PriceEntity> entityList = repository.findByStartDateAndBrandIdAndProductId(startDate, brandId, productId);
         return new PageImpl<>(priceMapper.toDto(entityList));
     }
