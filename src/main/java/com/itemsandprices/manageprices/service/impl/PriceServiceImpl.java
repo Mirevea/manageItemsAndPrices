@@ -2,8 +2,7 @@ package com.itemsandprices.manageprices.service.impl;
 
 import com.itemsandprices.manageprices.api.mapper.PriceMapper;
 import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
-import com.itemsandprices.manageprices.domain.entity.PriceEntity;
-import com.itemsandprices.manageprices.domain.entity.dto.PriceEntityDto;
+import com.itemsandprices.manageprices.domain.entity.entity.PriceEntity;
 import com.itemsandprices.manageprices.domain.repository.PriceRepository;
 import com.itemsandprices.manageprices.service.PriceService;
 import jakarta.transaction.Transactional;

@@ -1,4 +1,4 @@
-package com.itemsandprices.manageprices.domain.entity;
+package com.itemsandprices.manageprices.domain.entity.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
