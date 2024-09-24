@@ -14,6 +14,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,15 +29,14 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public PriceEntityDto findById(String id) {
-        return priceMapper.toDto(repository.findById(id)
-                .orElseThrow(ResourceNotFoundException::new));
+    public Optional<PriceEntityDto> findById(String id) {
+        return Optional.ofNullable(priceMapper.toDto(repository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)));
     }
 
     @Override
     public Page<PriceEntityDto> findByCondition(String startDate, Long brandId, String productId, Pageable pageable) {
-        Page<PriceEntity> entityPage = repository.findAll(pageable);
-        List<PriceEntity> entities = entityPage.getContent();
-        return new PageImpl<>(priceMapper.toDto(entities), pageable, entityPage.getTotalElements());
+        List<PriceEntity> entityList = repository.findByStartDateAndBrandIdAndProductId(startDate, brandId, productId);
+        return new PageImpl<>(priceMapper.toDto(entityList));
     }
 }
