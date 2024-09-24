@@ -1,4 +1,4 @@
-package com.itemsandprices.manageprices.dto;
+package com.itemsandprices.manageprices.domain.entity.dto;
 
 import lombok.*;
 

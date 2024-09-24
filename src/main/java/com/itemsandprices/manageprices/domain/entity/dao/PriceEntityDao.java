@@ -1,8 +1,8 @@
-package com.itemsandprices.manageprices.domain.dto;
+package com.itemsandprices.manageprices.domain.entity.dao;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class PriceEntityDto {
+public class PriceEntityDao {
     @NotEmpty(message = "The ID of the brand is required.")
     private String brandId;
     @NotEmpty(message = "The startDate of the product is required.")
@@ -33,6 +33,26 @@ public class PriceEntityDto {
 
     public void setStartDate(@NotEmpty(message = "The startDate of the product is required.") String startDate) {
         this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getPriceList() {
+        return priceList;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getCurr() {
+        return curr;
     }
 
     public void setEndDate(String endDate) {
