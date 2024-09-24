@@ -1,39 +1,39 @@
 
-# Microservicio REST de Productos
+# Product REST Microservice
 
-Este microservicio está construido en **Spring Boot 3.3.4** utilizando **Java JDK 17** y **Maven**. Su propósito es recuperar información relevante sobre los productos de una base de datos.
+This microservice is built on **Spring Boot 3.3.4** using **Java JDK 17** and **Maven**. Its purpose is to retrieve relevant information about products from a database.
 
-## Requisitos
+## Requirements
 
 - Java JDK 17
-- Maven 3.9.6 o superior
+- Maven 3.9.6 or higher
 
-## Instalación
+## Installation
 
-1. **Clona el repositorio**:
+1. **Clone the repository**:
 
    ```bash
    git clone <https://github.com/Mirevea/manageItemsAndPrices>
    cd <manageItemsAndPrices>
    ```
 
-2. **Compila e instala el proyecto**:
+2. **Build and install the project**:
 
-   Ejecuta el siguiente comando para compilar el proyecto. Este paso también asegura que se ejecute el archivo `pricesdatabase.yml` para realizar la inserción inicial de datos en la base de datos.
+   Run the following command to compile the project. This step also ensures that the `pricesdatabase.yml` file is executed to perform the initial data insertion into the database.
 
    ```bash
    mvn clean install
    ```
 
-## Ejecución
+## Running
 
-Para ejecutar el microservicio, utiliza el siguiente comando:
+To run the microservice, use the following command:
 
 ```bash
 mvn spring-boot:run
 ```
 
-Una vez que el microservicio esté en funcionamiento, podrás acceder a la aplicación en:
+Once the microservice is up and running, you can access the application at:
 
 ```
 http://localhost:8080
@@ -41,7 +41,7 @@ http://localhost:8080
 
 ## Endpoints
 
-- **GET /api/itemsAndPrices/page-query: Recupera una lista de todos los productos en base a x condiciones (Body válido json).
-- **GET /products/{id}**: Recupera la información de un producto específico por su ID.
+- **GET /api/itemsAndPrices/page-query**: Retrieves a list of all products based on specified conditions (valid JSON body).
+- **GET /products/{id}**: Retrieves the information of a specific product by its ID.
 
-## Notas
+## Notes
