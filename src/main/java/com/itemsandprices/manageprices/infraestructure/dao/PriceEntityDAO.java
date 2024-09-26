@@ -1,34 +1,18 @@
-package com.itemsandprices.manageprices.domain.entity;
+package com.itemsandprices.manageprices.infraestructure.dao;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
 
-@Entity
-@Table(name = "PRICES")
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@RequiredArgsConstructor
-public class PriceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RATE_ID")
+//@Getter
+public class PriceEntityDAO {
+
     private Long rateId;
-    @Column(name = "BRAND_ID")
     private Long brandId;
-    @Column(name = "START_DATE")
     private String startDate;
-    @Column(name = "END_DATE")
     private String endDate;
-    @Column(name = "PRICE_LIST")
     private String priceList;
-    @Column(name = "PRODUCT_ID")
     private String productId;
-    @Column(name = "PRIORITY")
     private String priority;
-    @Column(name = "PRICE")
     private String price;
-    @Column(name = "CURR")
     private String curr;
 
     public Long getRateId() {

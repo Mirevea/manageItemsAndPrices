@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RequestMapping("/api/itemsAndPrices")
@@ -28,8 +29,9 @@ public class ItemsAndPricesController {
 */
 
     @GetMapping("/getItems")
-    public ResponseEntity<List<PriceEntityDTO>> getitems(@Valid @RequestParam String operativeDate, @Valid @RequestParam String productId, @Valid @RequestParam String brandId) {
-        List<PriceEntityDTO> priceList = priceServiceImpl.findByCondition(operativeDate, productId, brandId);
-        return ResponseEntity.ok().body(priceList);
+    public ResponseEntity<PriceEntityDTO> getItems(@Valid @RequestParam String operativeDate, @Valid @RequestParam String productId, @Valid @RequestParam String brandId) {
+        /*Optional<PriceEntityDTO> priceDTO = priceServiceImpl.findByCondition(operativeDate, productId, brandId);
+        return priceDTO.map(priceRecovered -> ResponseEntity.ok().body(priceRecovered)).orElse(ResponseEntity.notFound().build());*/
+        return ResponseEntity.ok().body(priceServiceImpl.findByCondition(operativeDate, productId, brandId));
     }
 }

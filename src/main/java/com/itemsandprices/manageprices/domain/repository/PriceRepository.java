@@ -1,6 +1,6 @@
 package com.itemsandprices.manageprices.domain.repository;
 
-import com.itemsandprices.manageprices.domain.entity.entity.PriceEntity;
+import com.itemsandprices.manageprices.domain.entity.PriceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
