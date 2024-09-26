@@ -1,11 +1,11 @@
 package com.itemsandprices.manageprices.controller;
 
-import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
+import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
 
 public class PriceBuilder {
 
-    public static PriceEntityDao getDto() {
-        PriceEntityDao dto = new PriceEntityDao();
+    public static PriceEntityDTO getDto() {
+        PriceEntityDTO dto = new PriceEntityDTO();
         dto.setPrice("1");
         dto.setBrandId("1");
         dto.setProductId("1");

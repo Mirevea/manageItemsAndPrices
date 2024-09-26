@@ -1,8 +1,8 @@
-package com.itemsandprices.manageprices.domain.entity.dao;
+package com.itemsandprices.manageprices.api.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public class PriceEntityDao {
+public class PriceEntityDTO {
     @NotEmpty(message = "The ID of the brand is required.")
     private String brandId;
     @NotEmpty(message = "The startDate of the product is required.")

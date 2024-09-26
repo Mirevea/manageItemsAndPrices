@@ -1,7 +1,7 @@
 package com.itemsandprices.manageprices.controller;
 
 import com.itemsandprices.manageprices.api.controller.ItemsAndPricesController;
-import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
+import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
 import com.itemsandprices.manageprices.service.impl.PriceServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -48,11 +49,10 @@ class ItemsAndPricesControllerTest {
 
     @Test
     void findAllByPage() {
-        Page<PriceEntityDao> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
-        when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
-                .thenReturn(page);
+        when(priceServiceImpl.findByCondition(any(), any(), any()))
+                .thenReturn(List.of(PriceBuilder.getDto()));
 
-        Page<PriceEntityDao> res = priceServiceImpl.findByCondition(any(), any(), any(), any());
+        List<PriceEntityDTO> res = priceServiceImpl.findByCondition(any(), any(), any());
         assertNotNull(res);
     }
 
@@ -60,7 +60,7 @@ class ItemsAndPricesControllerTest {
     void getById() {
         when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(PriceBuilder.getDto()));
-        Optional<PriceEntityDao> resultActions = priceServiceImpl.findById("1111");
+        Optional<PriceEntityDTO> resultActions = priceServiceImpl.findById("1111");
 
         assertNotNull(resultActions);
     }

@@ -1,6 +1,6 @@
-package com.itemsandprices.manageprices.api.mapper;
+package com.itemsandprices.manageprices.infraestructure.mapper;
 
-import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
+import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
 import com.itemsandprices.manageprices.domain.entity.entity.PriceEntity;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface EntityMapper<D, E> {
 
-    PriceEntity toEntity(PriceEntityDao dto);
+    PriceEntity toEntity(PriceEntityDTO dto);
 
     D toDto(E entity);
 

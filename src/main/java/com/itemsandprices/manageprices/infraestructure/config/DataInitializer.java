@@ -1,4 +1,4 @@
-package com.itemsandprices.manageprices;
+package com.itemsandprices.manageprices.infraestructure.config;
 
 import com.itemsandprices.manageprices.domain.entity.entity.PriceEntity;
 import com.itemsandprices.manageprices.domain.repository.PriceRepository;

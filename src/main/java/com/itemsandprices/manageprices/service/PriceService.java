@@ -1,15 +1,15 @@
 package com.itemsandprices.manageprices.service;
 
-import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public interface PriceService {
-    Optional<PriceEntityDao> findById(String id);
+    Optional<PriceEntityDTO> findById(String id);
 
-    Page<PriceEntityDao> findByCondition(String startDate, Long brandId, String productId, Pageable pageable);
+    List<PriceEntityDTO> findByCondition(String operativeDay, String productId, String brandId);
 }
