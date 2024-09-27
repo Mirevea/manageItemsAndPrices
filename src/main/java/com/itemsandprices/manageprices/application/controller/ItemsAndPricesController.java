@@ -27,8 +27,6 @@ public class ItemsAndPricesController {
 
     @GetMapping("/getItems")
     public ResponseEntity<PriceEntityDTO> getItems(@Valid @RequestParam String operativeDate, @Valid @RequestParam String productId, @Valid @RequestParam String brandId) {
-        /*Optional<PriceEntityDTO> priceDTO = priceServiceImpl.findByCondition(operativeDate, productId, brandId);
-        return priceDTO.map(priceRecovered -> ResponseEntity.ok().body(priceRecovered)).orElse(ResponseEntity.notFound().build());*/
         return ResponseEntity.ok().body(priceServiceImpl.findByCondition(operativeDate, productId, brandId));
     }
 }
