@@ -1,4 +1,4 @@
-package com.itemsandprices.manageprices.api.response;
+package com.itemsandprices.manageprices.application.response;
 
 
 import java.time.LocalDateTime;

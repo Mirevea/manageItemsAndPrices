@@ -1,13 +1,28 @@
-package com.itemsandprices.manageprices.api.dto;
+package com.itemsandprices.manageprices.application.dto;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PriceEntityDTO {
     private String brandId;
-    private String availableDates;
+    private String startDate;
+    private String endDate;
     private String productId;
+    @JsonIgnore
     private String priority;
+    @JsonIgnore
+    private String price;
     private String finalPrice;
+    @JsonIgnore
     private String curr;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getBrandId() {
         return brandId;
@@ -17,12 +32,12 @@ public class PriceEntityDTO {
         this.brandId = brandId;
     }
 
-    public String getAvailableDates() {
-        return availableDates;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setAvailableDates(String availableDates) {
-        this.availableDates = availableDates;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getProductId() {
@@ -42,7 +57,7 @@ public class PriceEntityDTO {
     }
 
     public String getFinalPrice() {
-        return finalPrice;
+        return price + " " + curr;
     }
 
     public void setFinalPrice(String finalPrice) {
@@ -55,5 +70,13 @@ public class PriceEntityDTO {
 
     public void setCurr(String curr) {
         this.curr = curr;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

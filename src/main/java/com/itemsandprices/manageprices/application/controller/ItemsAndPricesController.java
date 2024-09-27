@@ -1,14 +1,11 @@
-package com.itemsandprices.manageprices.api.controller;
+package com.itemsandprices.manageprices.application.controller;
 
-import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
+import com.itemsandprices.manageprices.application.dto.PriceEntityDTO;
 import com.itemsandprices.manageprices.service.impl.PriceServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 
 @RequestMapping("/api/itemsAndPrices")

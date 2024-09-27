@@ -1,6 +1,6 @@
 package com.itemsandprices.manageprices.service;
 
-import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
+import com.itemsandprices.manageprices.application.dto.PriceEntityDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

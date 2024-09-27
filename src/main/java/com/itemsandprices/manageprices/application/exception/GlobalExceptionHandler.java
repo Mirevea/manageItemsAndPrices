@@ -1,6 +1,6 @@
-package com.itemsandprices.manageprices.api.exception;
+package com.itemsandprices.manageprices.application.exception;
 
-import com.itemsandprices.manageprices.api.response.ErrorResponse;
+import com.itemsandprices.manageprices.application.response.ErrorResponse;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

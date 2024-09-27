@@ -1,20 +1,16 @@
 package com.itemsandprices.manageprices.controller;
 
-import com.itemsandprices.manageprices.api.controller.ItemsAndPricesController;
-import com.itemsandprices.manageprices.api.dto.PriceEntityDTO;
+import com.itemsandprices.manageprices.application.controller.ItemsAndPricesController;
+import com.itemsandprices.manageprices.application.dto.PriceEntityDTO;
 import com.itemsandprices.manageprices.service.impl.PriceServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
