@@ -39,7 +39,7 @@ public class PriceServiceImpl implements PriceService {
 
         PriceEntityDAO priceEntityDAO = prices.stream()
                 .max(Comparator.comparingInt(price -> Integer.parseInt(price.getPriority()))) // Convertir a entero
-                .orElseThrow(() -> new ResourceNotFoundException("No price found")
+                .orElseThrow(() -> new ResourceNotFoundException("No prices found for product " + productId)
         );
 
         PriceEntityDTO priceDTO = priceMapper.toDto(priceEntityDAO);
