@@ -1,22 +1,20 @@
 package com.itemsandprices.manageprices.controller;
 
-import com.itemsandprices.manageprices.api.controller.ItemsAndPricesController;
-import com.itemsandprices.manageprices.domain.entity.dao.PriceEntityDao;
+import com.itemsandprices.manageprices.application.controller.ItemsAndPricesController;
+import com.itemsandprices.manageprices.application.dto.PriceEntityDTO;
 import com.itemsandprices.manageprices.service.impl.PriceServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -47,20 +45,27 @@ class ItemsAndPricesControllerTest {
     }
 
     @Test
-    void findAllByPage() {
-        Page<PriceEntityDao> page = new PageImpl<>(Collections.singletonList(PriceBuilder.getDto()));
-        when(priceServiceImpl.findByCondition(any(), any(), any(), any()))
-                .thenReturn(page);
+    void findAllByCondition() {
+        when(priceServiceImpl.findByCondition(any(), any(), any()))
+                .thenReturn(PriceBuilder.getDto());
 
-        Page<PriceEntityDao> res = priceServiceImpl.findByCondition(any(), any(), any(), any());
+        PriceEntityDTO res = priceServiceImpl.findByCondition(any(), any(), any());
         assertNotNull(res);
+    }
+
+    @Test
+    void notFoundPrice() {
+        when(priceServiceImpl.findByCondition(any(), any(), any()))
+                .thenThrow(ResourceNotFoundException.class);
+
+        assertThrows(ResourceNotFoundException.class, () -> priceServiceImpl.findByCondition(any(), any(), any()));
     }
 
     @Test
     void getById() {
         when(priceServiceImpl.findById(ArgumentMatchers.anyString()))
                 .thenReturn(Optional.of(PriceBuilder.getDto()));
-        Optional<PriceEntityDao> resultActions = priceServiceImpl.findById("1111");
+        Optional<PriceEntityDTO> resultActions = priceServiceImpl.findById("1111");
 
         assertNotNull(resultActions);
     }
