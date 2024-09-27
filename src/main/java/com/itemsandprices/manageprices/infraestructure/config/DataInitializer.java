@@ -1,6 +1,6 @@
-package com.itemsandprices.manageprices;
+package com.itemsandprices.manageprices.infraestructure.config;
 
-import com.itemsandprices.manageprices.domain.entity.entity.PriceEntity;
+import com.itemsandprices.manageprices.domain.entity.PriceEntity;
 import com.itemsandprices.manageprices.domain.repository.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
