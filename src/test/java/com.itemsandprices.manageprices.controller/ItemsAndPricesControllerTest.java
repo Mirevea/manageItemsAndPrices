@@ -43,14 +43,14 @@ class ItemsAndPricesControllerTest {
         closeable.close();
     }
 
-/*    @Test
-    void findAllByPage() {
+    @Test
+    void findAllByCondition() {
         when(priceServiceImpl.findByCondition(any(), any(), any()))
                 .thenReturn(PriceBuilder.getDto());
 
-        Optional<PriceEntityDTO> res = priceServiceImpl.findByCondition(any(), any(), any());
+        PriceEntityDTO res = priceServiceImpl.findByCondition(any(), any(), any());
         assertNotNull(res);
-    }*/
+    }
 
     @Test
     void getById() {
