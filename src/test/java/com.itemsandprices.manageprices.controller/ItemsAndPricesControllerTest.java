@@ -7,13 +7,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -50,6 +51,14 @@ class ItemsAndPricesControllerTest {
 
         PriceEntityDTO res = priceServiceImpl.findByCondition(any(), any(), any());
         assertNotNull(res);
+    }
+
+    @Test
+    void notFoundPrice() {
+        when(priceServiceImpl.findByCondition(any(), any(), any()))
+                .thenThrow(ResourceNotFoundException.class);
+
+        assertThrows(ResourceNotFoundException.class, () -> priceServiceImpl.findByCondition(any(), any(), any()));
     }
 
     @Test
